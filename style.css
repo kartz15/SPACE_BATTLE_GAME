@@ -1,0 +1,100 @@
+/* Basic reset */
+body, h1, h2, p, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background-color: #000;*/
+    background-image: url("https://cdn.pixabay.com/animation/2024/02/18/16/36/16-36-43-783_512.gif");
+    background-size: cover; /* Ensure the image covers the entire element */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-position: center center; /* Center the image */
+    background-attachment: fixed; /* Keep background fixed during scrolling */
+    color: #fff;
+    z-index: 1;
+}
+
+#start-screen {
+    text-align: center;
+}
+
+#game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    align-self: center;
+}
+
+.battlefield {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Maximum width for larger screens */
+    margin-bottom: 20px;
+}
+
+#player-section ,#alien-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #333;
+    width: 45%; /* Adjust width to ensure they fit side by side */
+}
+
+
+#player-section {
+    border-color: #0f0;
+}
+
+#alien-section {
+    border-color: #f00;
+}
+
+#player-name, #alien-name {
+    margin-bottom: 10px;
+}
+
+#player-image, #alien-image {
+    width: 150px; 
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#status {
+    font-size: 18px;
+    margin-top: 20px;
+}

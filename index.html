@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Space Battle</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="start-screen">
+        <h1>Space Battle</h1>
+        <p>Prepare for an epic space battle! Click "Start Game" to begin.</p>
+        <button id="startBtn">Start Game</button>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="game" style="display: none;">
+        <div class="battlefield">
+        <div id="player-section" class="game-section">
+            <h2 id="player-name">Your Ship</h2>
+            <img id="player-image" src="" alt="Player Ship">
+            <p id="player-details">Details about your ship will appear here.</p>
+        </div>
+
+        <div id="alien-section" class="game-section">
+            <h2 id="alien-name">Current Alien</h2>
+            <img id="alien-image" src="" alt="Alien Ship">
+            <p id="alien-details">Details about the current alien will appear here.</p>
+        </div>
+    </div>
+        <div id="controls" class="game-section">
+            <button id="attackBtn">Attack</button>
+            <button id="retreatBtn">Retreat</button>
+        </div>
+
+        <div id="status" class="game-section">
+            Get ready for battle!
+        </div>
+        <!-- Audio elements -->
+        <audio id="attack-sound" src="https://freesound.org/data/previews/425/425349_5123644-lq.mp3"></audio>
+        <audio id="background-music" src="https://www.myinstants.com/en/instant/shoryuken-ryu/?utm_source=copy&utm_medium=share" loop></audio> 
+
+
+    </div>
+
+    <script src="app1.js"></script>
+</body>
+</html>
