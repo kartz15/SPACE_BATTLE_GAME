@@ -22,7 +22,10 @@ class SpaceBattle {
         this.initializeGame();
 
          // Bind event listeners
-         initializeEventListeners();
+         this.attackBtn.addEventListener('click', () => this.attack());
+         this.retreatBtn.addEventListener('click', () => this.retreat());
+         this.startBtn.addEventListener('click', () => this.startGame());
+         this.resetBtn.addEventListener('click', () => this.resetGame());
  
          // Show the start screen initially
          this.showStartScreen();
@@ -63,6 +66,7 @@ class SpaceBattle {
 
             this.backgroundMusic.volume = 0.5; 
             this.backgroundMusic.play();
+
         }
     
         createAliens() {
@@ -76,13 +80,6 @@ class SpaceBattle {
             ];
         }
 
-        initializeEventListeners() {
-            this.attackBtn.addEventListener('click', () => this.attack());
-            this.retreatBtn.addEventListener('click', () => this.retreat());
-            this.startBtn.addEventListener('click', () => this.startGame());
-            this.resetBtn.addEventListener('click', () => this.resetGame());
-        }
-        
     showStartScreen() {
         document.getElementById('game').style.display = 'none';
         document.getElementById('start-screen').style.display = 'block';
