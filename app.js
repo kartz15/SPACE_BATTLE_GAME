@@ -4,7 +4,7 @@ class Ship {
         this.hull = hull;
         this.firepower = firepower;
         this.accuracy = accuracy;
-        this.image = image;  // URL to the ship's image
+        this.image = image; 
     }
 
     attack(target) {
@@ -72,7 +72,6 @@ class SpaceBattle {
         ];
         this.currentAlienIndex = 0;
 
-        // Get references to HTML elements
         this.statusEl = document.getElementById('status');
         this.attackBtn = document.getElementById('attackBtn');
         this.retreatBtn = document.getElementById('retreatBtn');
@@ -87,8 +86,7 @@ class SpaceBattle {
         // Get reference to the audio element
         this.attackSound = document.getElementById('attack-sound');
         this.backgroundMusic = document.getElementById('background-music');
-        // Set the volume (optional)
-        this.backgroundMusic.volume = 0.5; // Volume level from 0.0 to 1.0
+        this.backgroundMusic.volume = 0.5; 
 
         // Play background music
         this.backgroundMusic.play();
