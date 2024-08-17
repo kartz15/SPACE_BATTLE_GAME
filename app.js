@@ -19,86 +19,65 @@ class Ship {
 class SpaceBattle {
     constructor() {
         // Initialize player and aliens
-        this.player = new Ship(
-            "USS Assembly",
-            20,
-            5,
-            0.7,
-            'https://giffiles.alphacoders.com/576/57614.gif'
-        );
-        this.aliens = [
-            new Ship(
-                "E.T.",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://media0.giphy.com/media/Z70x1bA6mL3OM/giphy.gif?cid=6c09b952csiy1go8kkbdjf9xrk93awm8hivucdb5hwx9di8k&ep=v1_gifs_search&rid=giphy.gif&ct=g'
-            ),
-            new Ship(
-                "Roger",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://www.netanimations.net/alien_56.gif'
-            ),
-            new Ship(
-                "ExampleAlien",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://www.animatedimages.org/data/media/33/animated-alien-and-extraterrestrial-image-0163.gif'
-            ),
-            new Ship(
-                "Four_eye_Freak",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://media.tenor.com/SrJ7qdCO1LAAAAAM/space-alien.gif'
-            ),
-            new Ship(
-                "CamoAlien",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://cdn.dribbble.com/users/2023273/screenshots/6026642/234324.gif'
-            ),
-            new Ship(
-                "LlamaAlien",
-                this.generateRandomNumber(3, 6),
-                this.generateRandomNumber(2, 4),
-                this.generateRandomNumber(0.6, 0.8),
-                'https://cdn.pixabay.com/animation/2023/01/03/12/08/12-08-43-309_512.gif'
-            )
-        ];
-        this.currentAlienIndex = 0;
+        this.initializeGame();
 
-        this.statusEl = document.getElementById('status');
-        this.attackBtn = document.getElementById('attackBtn');
-        this.retreatBtn = document.getElementById('retreatBtn');
-        this.startBtn = document.getElementById('startBtn');
-        this.playerImage = document.getElementById('player-image');
-        this.alienImage = document.getElementById('alien-image');
-        this.playerDetails = document.getElementById('player-details');
-        this.alienDetails = document.getElementById('alien-details');
-        this.playerName = document.getElementById('player-name');
-        this.alienName = document.getElementById('alien-name');
+         // Bind event listeners
+         this.attackBtn.addEventListener('click', () => this.attack());
+         this.retreatBtn.addEventListener('click', () => this.retreat());
+         this.startBtn.addEventListener('click', () => this.startGame());
+         this.resetBtn.addEventListener('click', () => this.resetGame());
+ 
+         // Show the start screen initially
+         this.showStartScreen();
+     }
 
-        // Get reference to the audio element
-        this.attackSound = document.getElementById('attack-sound');
-        this.backgroundMusic = document.getElementById('background-music');
-        this.backgroundMusic.volume = 0.5; 
+        initializeGame() {
+            this.player = new Ship("USS Assembly",20,5, 0.7,'https://giffiles.alphacoders.com/576/57614.gif');
+            this.aliens = this.createAliens();
+            this.currentAlienIndex = 0;
+    
+            this.statusEl = document.getElementById('status');
+            this.attackBtn = document.getElementById('attackBtn');
+            this.retreatBtn = document.getElementById('retreatBtn');
+            this.startBtn = document.getElementById('startBtn');
+            this.resetBtn = document.getElementById('resetBtn');
+            this.playerImage = document.getElementById('player-image');
+            this.alienImage = document.getElementById('alien-image');
+            this.playerDetails = document.getElementById('player-details');
+            this.alienDetails = document.getElementById('alien-details');
+            this.playerName = document.getElementById('player-name');
+            this.alienName = document.getElementById('alien-name');
+    
+            // Get reference to the audio elements
+            this.attackSound = document.getElementById('attack-sound');
+            this.backgroundMusic = document.getElementById('background-music');
 
-        // Play background music
-        this.backgroundMusic.play();
 
-        // Bind event listeners
-        this.attackBtn.addEventListener('click', () => this.attack());
-        this.retreatBtn.addEventListener('click', () => this.retreat());
-        this.startBtn.addEventListener('click', () => this.startGame());
+            // Error handling with fallback
+            this.backgroundMusic.onerror = () => {
+                console.error('Background music failed to load.');
+                this.backgroundMusic.src = 'fallback-music.mp3'; // Replace with a fallback music URL
+            };
 
-        // Show the start screen initially
-        this.showStartScreen();
-    }
+            this.attackSound.onerror = () => {
+                console.error('Attack sound failed to load.');
+                this.attackSound.src = 'fallback-sound.mp3'; // Replace with a fallback sound URL
+            };
+
+            this.backgroundMusic.volume = 0.5; 
+            this.backgroundMusic.play();
+        }
+    
+        createAliens() {
+            return [
+                new Ship("E.T.", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://media0.giphy.com/media/Z70x1bA6mL3OM/giphy.gif?cid=6c09b952csiy1go8kkbdjf9xrk93awm8hivucdb5hwx9di8k&ep=v1_gifs_search&rid=giphy.gif&ct=g'),
+                new Ship("Roger", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.netanimations.net/alien_56.gif'),
+                new Ship("ExampleAlien", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.animatedimages.org/data/media/33/animated-alien-and-extraterrestrial-image-0163.gif'),
+                new Ship("Four_eye_Freak", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://media.tenor.com/SrJ7qdCO1LAAAAAM/space-alien.gif'),
+                new Ship("CamoAlien", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://cdn.dribbble.com/users/2023273/screenshots/6026642/234324.gif'),
+                new Ship("LlamaAlien", this.generateRandomNumber(3, 6), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://cdn.pixabay.com/animation/2023/01/03/12/08/12-08-43-309_512.gif')
+            ];
+        }
 
     showStartScreen() {
         document.getElementById('game').style.display = 'none';
@@ -137,6 +116,7 @@ class SpaceBattle {
 
             // Update details after player attack
             this.updateDetails();
+
 
             if (alien.hull <= 0) {
                 this.updateStatus(`Congratulations! ${alien.name} has been destroyed. You win this round!`);
@@ -179,6 +159,18 @@ class SpaceBattle {
         this.attackBtn.disabled = true;
         this.retreatBtn.disabled = true;
     }
+
+        resetGame() {
+            const confirmReset = confirm("Are you sure you want to reset the game?");
+            if (confirmReset) {
+                this.initializeGame();
+                this.updateImages();
+                this.updateDetails();
+                this.updateStatus(`Game has been reset. Prepare for battle!`);
+                this.attackBtn.disabled = false;
+                this.retreatBtn.disabled = false;
+            }
+        }
 
     updateStatus(message) {
         this.statusEl.textContent = message;
