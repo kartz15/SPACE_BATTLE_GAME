@@ -67,6 +67,14 @@ body {
     height: 200px;
     margin-bottom: 10px;
     border-radius: 50%;
+
+    width: 100px;
+    height: 100px;
+    /* background-color: red; */
+    position: relative;
+    animation-name: move;
+    animation-duration: 10s;
+    animation-delay: -7s;
 }
 
 #controls {
@@ -74,7 +82,19 @@ body {
     justify-content: space-evenly;
     margin: 20px;
 }
-
+/* Define a class to apply the animation */
+.animate-move-right {
+    animation: moveRight 5s ease forwards; /* Apply animation with ease timing function */
+}
+ /* Define the keyframes for the animation */
+ @keyframes moveRight {
+    from { 
+        transform: translateX(0); /* Start from original position */
+    }
+    to { 
+        transform: translateX(300px); /* Move 300px to the right */
+    }
+}
 /* General Button Styles */
 button {
     margin: 5px;
@@ -118,6 +138,7 @@ button:disabled {
 #attackBtn:focus {
     animation: pulse 0.6s; 
     outline: none;
+    background-color: rgb(26, 146, 182);
 }
 
 /* Specific Styles for Retreat Button (Keeping as is for consistency) */
@@ -283,3 +304,14 @@ button:disabled {
         transform: scale(1);
     }
 }
+
+
+
+@keyframes move {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
+
