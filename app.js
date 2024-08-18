@@ -5,6 +5,7 @@ class Ship {
         this.firepower = firepower;
         this.accuracy = accuracy;
         this.image = image; 
+        this.originalHull = hull; // Store the initial hull value
     }
     attack(target) {
         const hit = Math.random() < this.accuracy;
@@ -16,7 +17,6 @@ class Ship {
 }
 class SpaceBattle {
     constructor() {
-        // Initialize player and aliens
         this.initializeGame();
         this.setupEventListeners();
         this.showStartScreen();
@@ -29,12 +29,12 @@ class SpaceBattle {
             this.startBtn.addEventListener('click', () => this.startGame());
             this.resetBtn.addEventListener('click', () => this.resetGame());
             }
-
         initializeGame() {
             this.player = new Ship("USS Assembly",20,5, 0.7,'https://giffiles.alphacoders.com/576/57614.gif');
             this.aliens = this.createAliens();
             this.currentAlienIndex = 0;
-    
+            this.totalAliens = this.aliens.length;
+
             this.statusEl = document.getElementById('status');
             this.attackBtn = document.getElementById('attackBtn');
             this.retreatBtn = document.getElementById('retreatBtn');
@@ -46,17 +46,27 @@ class SpaceBattle {
             this.alienDetails = document.getElementById('alien-details');
             this.playerName = document.getElementById('player-name');
             this.alienName = document.getElementById('alien-name');
-
-             // Get reference to the audio elements
+            this.alienCountNumber = document.getElementById('alien-count-number');
             this.attackSound = document.getElementById('attack-sound');
             // this.backgroundMusic = document.getElementById('background-music');
             // this.backgroundMusic.loop = true; // Ensure background music loops
             // this.backgroundMusic.volume = 0.5; // Sets volume to 50%
         }
+        updateHealthBars() {
+            const playerHealthPercentage = this.player.hull / 20 * 100;
+            const alienHealthPercentage = this.aliens[this.currentAlienIndex].hull / this.aliens[this.currentAlienIndex].originalHull * 100;
+        
+            document.getElementById('player-health-inner').style.width = `${playerHealthPercentage}%`;
+            document.getElementById('alien-health-inner').style.width = `${alienHealthPercentage}%`;
+        }
         testAudio() {
-            // Try to play audio manually
             this.attackSound.play().catch(error => console.error('Error playing attack sound:', error));
          //   this.backgroundMusic.play().catch(error => console.error('Error playing background music:', error));
+        }
+        updateAlienCount() {
+            const totalAliens = this.aliens.length;
+            const remainingAliens = totalAliens - this.currentAlienIndex;
+            this.alienCountNumber.textContent = `Aliens left: ${remainingAliens} / ${totalAliens}`;
         }
         createAliens() {
             return [
@@ -75,26 +85,20 @@ class SpaceBattle {
     startGame() {
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('game').style.display = 'flex';
-
-    // Update status and images
-    this.updateImages();
-    this.updateDetails();
-    this.updateStatus(`Welcome to Space Battle! Your ship: ${this.player.name}. Prepare for your first opponent.`);
-
-     // Play background music
-    // this.backgroundMusic.play().catch(error => console.error('Error playing background music:', error));
-      
+        this.updateImages();
+        this.updateDetails();
+        this.updateStatus(`Welcome to Space Battle! Your ship: ${this.player.name}. Prepare for your first opponent.`);
+        this.updateAlienCount(); 
+        // Play background music
+        // this.backgroundMusic.play().catch(error => console.error('Error playing background music:', error));     
     }
     generateRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
     attack() {
         const alien = this.aliens[this.currentAlienIndex];
-
-       // Play attack sound
         this.attackSound.currentTime = 0; // Reset to the start
         this.attackSound.play().catch(error => console.error('Error playing attack sound:', error));
-
         if (alien.hull > 0) { 
             // Player attacks
             const playerHit = this.player.attack(alien);
@@ -102,46 +106,55 @@ class SpaceBattle {
                 this.updateStatus(`Player attacked ${alien.name}! Successful hit. Alien hull now ${alien.hull}`);
             } else {
                 this.updateStatus(`Player attacked ${alien.name}, but missed!`);
-            }
-            // Update details after player attack
+            }   
             this.updateDetails();
+            this.updateHealthBars(); 
             if (alien.hull <= 0) {
                 this.updateStatus(`Congratulations! ${alien.name} has been destroyed. You win this round!`);
+                this.updateHealthBars(); 
                 this.currentAlienIndex++;
                 if (this.currentAlienIndex < this.aliens.length) {
                     this.updateImages();
                     this.updateDetails();
                     this.updateStatus(`Next alien: ${this.aliens[this.currentAlienIndex].name}. Prepare for battle!`);
+                    this.updateHealthBars(); 
                 } else {
                     this.updateStatus(`All aliens have been destroyed! You win the game!`);
                     this.attackBtn.disabled = true;
-                      // Add an alert to notify the player of the win
+                    this.updateAlienCount(); 
                     confirm("Congratulations! You have defeated all the aliens and won the game!");
+                    this.updateHealthBars(); 
                     return;
                 }
+                this.updateAlienCount(); 
+                this.updateHealthBars(); 
                 return;
             }
             // Alien retaliates
             const alienHit = alien.attack(this.player);
             if (alienHit) {
                 this.updateStatus(`The alien retaliates! ${alien.name} hit you. Your hull is now ${this.player.hull}`);
+                this.updateHealthBars(); 
             } else {
                 this.updateStatus(`The alien retaliates but misses!`);
+                this.updateHealthBars(); 
             }
-            // Update details after alien attack
             this.updateDetails();
-
+            this.updateHealthBars(); 
             if (this.player.hull <= 0) {
                 this.updateStatus(`Your ship has been destroyed by ${alien.name}! Game over.`);
                 this.attackBtn.disabled = true;
                 this.retreatBtn.disabled = true;
+                this.updateHealthBars(); 
             }
         }
     }
     retreat() {
+        confirm("Are you sure you want to retreat the game?");
         this.updateStatus(`You have retreated from battle. Game over.`);
         this.attackBtn.disabled = true;
         this.retreatBtn.disabled = true;
+        this.updateHealthBars();
     }
     resetGame() {
         const confirmReset = confirm("Are you sure you want to reset the game?");
@@ -152,29 +165,26 @@ class SpaceBattle {
             this.updateStatus(`Game has been reset. Prepare for battle!`);
             this.attackBtn.disabled = false;
             this.retreatBtn.disabled = false;
+            this.updateAlienCount(); 
+            this.updateHealthBars();
         }
     }
     updateStatus(message) {
         this.statusEl.textContent = message;
     }
-
     updateImages() {
         this.playerImage.src = this.player.image;
         this.alienImage.src = this.aliens[this.currentAlienIndex].image;
     }
-
     updateDetails() {
-        // Update player details
         this.playerName.textContent = `Your Ship: ${this.player.name}`;
         this.playerDetails.textContent = `Hull: ${this.player.hull}, Firepower: ${this.player.firepower}, Accuracy: ${(this.player.accuracy * 100).toFixed(1)}%`;
 
-        // Update alien details
         const alien = this.aliens[this.currentAlienIndex];
         this.alienName.textContent = `Target Alien: ${alien.name}`;
         this.alienDetails.textContent = `Hull: ${alien.hull}, Firepower: ${alien.firepower}, Accuracy: ${(alien.accuracy * 100).toFixed(1)}%`;
     }
 }
-
 // Initialize the game once the document is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     const game = new SpaceBattle();

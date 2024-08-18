@@ -16,18 +16,31 @@
 
     <!-- Game Interface -->
     <div id="game" style="display: none;">
+
+        <div id="alien-count" class="game-section">
+            <span id="alien-count-number">0</span>
+        </div>
+
         <div class="battlefield">
             <div id="player-section" class="game-section">
                 <h2 id="player-name">Your Ship</h2>
                 <img id="player-image" src="" alt="Player Ship">
                 <p id="player-details">Details about your ship will appear here.</p>
+                <div id="player-health" class="health-bar">
+                    <div id="player-health-inner"></div>
+                </div>
             </div>
-
+            
+            
             <div id="alien-section" class="game-section">
                 <h2 id="alien-name">Current Alien</h2>
                 <img id="alien-image" src="" alt="Alien Ship">
                 <p id="alien-details">Details about the current alien will appear here.</p>
+                <div id="alien-health" class="health-bar">
+                    <div id="alien-health-inner"></div>
+                </div>
             </div>
+            
         </div>
         <div id="controls" class="game-section">
             <button id="attackBtn">Attack</button>

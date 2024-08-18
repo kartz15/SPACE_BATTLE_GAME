@@ -1,8 +1,7 @@
-/* Basic reset */
 body, h1, h2, p, button {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 body {
@@ -43,19 +42,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid;
+    /* border: 2px solid; */
     padding: 15px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px; 
+    /* background-color: rgba(0, 0, 0, 0.6); */
 }
 
+/* 
 #player-section {
     border-color: #0f0;
 }
 
 #alien-section {
     border-color: #f00;
-}
+} */
 
 #player-name, #alien-name {
     margin-bottom: 10px;
@@ -66,27 +66,27 @@ body {
     width: 200px;
     height: 200px;
     margin-bottom: 10px;
+    border-radius: 50%;
 }
 
 #controls {
     display:inline;
     justify-content: space-evenly;
     margin: 20px;
-
 }
 
 /* General Button Styles */
 button {
     margin: 5px;
-    padding: 10px 20px; /* Same padding for all buttons */
-    font-size: 18px;    /* Same font size for all buttons */
+    padding: 10px 20px; 
+    font-size: 18px;   
     border: none;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    display: inline-block; /* Ensure buttons align correctly */
-    width: 100px; /* Set a fixed width for all buttons */
+    display: inline-block; 
+    width: 100px;
 }
 
 button:hover {
@@ -100,72 +100,75 @@ button:disabled {
 
 /* Specific Styles for Attack Button */
 #attackBtn {
-    background-color: #28a745; /* Green background color */
-    border: 2px solid #1e7e34; /* Slightly darker green border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    background-color: #28a745;
+    border: 2px solid #1e7e34; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
 #attackBtn:hover {
-    background-color: #218838; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #218838; 
+    transform: scale(1.05); 
 }
 
 #attackBtn:active {
-    background-color: #1e7e34; /* Even darker green on click */
-    transform: scale(0.95); /* Slightly shrink the button on click */
+    background-color: #1e7e34; 
+    transform: scale(0.95);
 }
 
+#attackBtn:focus {
+    animation: pulse 0.6s; 
+    outline: none;
+}
 
 /* Specific Styles for Retreat Button (Keeping as is for consistency) */
 #retreatBtn {
-    background-color: #919d25; /* Blue background color */
-    border: 2px solid #a4b22b; /* Slightly darker blue border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    background-color: #919d25; 
+    border: 2px solid #a4b22b; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
 #retreatBtn:hover {
-    background-color: #bfda53; /* Darker blue on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #bfda53; 
+    transform: scale(1.05);
 }
 
 #retreatBtn:active {
-    background-color: #003d7a; /* Even darker blue on click */
-    transform: scale(0.95); /* Slightly shrink the button on click */
+    background-color: #003d7a; 
+    transform: scale(0.95);
 }
-
 
 /* Specific Styles for Reset Button */
 #resetBtn {
-    background-color: #dc3545; /* Red color for prominence */
-    border: 2px solid #b52a38; /* Slightly darker border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    background-color: #dc3545; 
+    border: 2px solid #b52a38; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
 #resetBtn:hover {
-    background-color: #c82333; /* Darker red on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #c82333; 
+    transform: scale(1.05);
 }
 
 #resetBtn:active {
-    background-color: #bd2130; /* Even darker red on click */
-    transform: scale(0.95); /* Slightly shrink the button on click */
+    background-color: #bd2130; 
+    transform: scale(0.95); 
 }
 
 /* Specific Styles for Start Game Button */
 #startBtn {
-    background-color: #17a2b8; /* Teal background color */
-    border: 2px solid #117a8b; /* Slightly darker teal border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    background-color: #17a2b8;
+    border: 2px solid #117a8b; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 #startBtn:hover {
-    background-color: #138496; /* Darker teal on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #138496;
+    transform: scale(1.05);
 }
 
 #startBtn:active {
-    background-color: #117a8b; /* Even darker teal on click */
-    transform: scale(0.95); /* Slightly shrink on click */
+    background-color: #117a8b; 
+    transform: scale(0.95);
 }
 
 #status {
@@ -173,26 +176,110 @@ button:disabled {
     margin-top: 20px;
 }
 
+#alien-count {
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #f00; 
+}
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+    /* Stack battlefield items vertically */
     .battlefield {
-        flex-direction: column;
+        /* flex-direction: column; */
         align-items: center;
-        margin-top: 2em;
+        margin-top: 1em;
+        display: flex;
     }
 
+    /* Style player and alien images */
     #player-image, #alien-image {
         width: 100px;
         height: 100px;
-        border-radius:5%;
+        margin-bottom: 10px; 
     }
-    button{
-        display: inline;
-        width:90px;
+
+    /* Hide all other content except player and alien images, and buttons */
+    #start-screen {
+        display: none; 
     }
-    #startBtn{
-        text-align: center;
-        margin-left :1em;
+
+    #game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%; 
+    }
+
+    #controls {
+        display: flex; 
+        justify-content: center; 
+        width: 100%; 
+        margin: 10px 0; /* Adjust margin as needed */
+        align-items: center;
+    }
+
+    /* Ensure buttons are displayed properly */
+    button {
+        margin: 5px;
+        width: 90px; 
+        font-size: 16px; 
+    }
+
+    /* Hide status and health bars */
+    .health-bar, #player-details, #alien-details {
+        display: none; 
+    }
+
+    #status {
+        font-size: small;
+    }
+
+    /* Hide player and alien names */
+    #player-name, #alien-name {
+        display: none; 
+    }
+
+    /* Style alien count */
+    #alien-count {
+        font-size: medium; /* Corrected font size */
+        color: rgb(213, 36, 36); 
+        margin-top: 10px; 
+        font-weight: bold;
+    }
+}
+
+
+.health-bar {
+    width: 200px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.health-bar div {
+    height: 100%;
+    border-radius: 10px;
+}
+
+#player-health-inner {
+    background-color: #28a745; /* Green for player */
+}
+
+#alien-health-inner {
+    background-color: #f00; /* Red for alien */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
     }
 }
