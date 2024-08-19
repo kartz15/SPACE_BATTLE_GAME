@@ -97,23 +97,20 @@ class SpaceBattle {
         }   
         startAnimation() {
                console.log('Starting animation');
-               
-            // this.attackBtn.classList.add('animate-move-right');
             this.playerImage.classList.add('animate-move-right');
             this.alienImage.classList.add('animate-move-left');
 
              // Change the animation properties
             this.playerImage.style.animationName = 'moveRight';
-            this.playerImage.style.animationDuration = '1s'; // Adjust as needed
-            this.playerImage.style.animationDelay = '0s'; // Adjust as needed
+            this.playerImage.style.animationDuration = '1s';
+            this.playerImage.style.animationDelay = '0s'; 
           //  this.playerImage.style.backgroundColor='blue';
          //  this.playerImage.src= 'images/e0bb5dfd0a11994244793d6eb28138ae.gif';
 
             this.alienImage.style.animationName = 'moveLeft';
-            this.alienImage.style.animationDuration = '1s'; // Adjust as needed
-            this.alienImage.style.animationDelay = '0s'; // Adjust as needed
-           //this.alienImage.style.backgroundColor='red';
-                    
+            this.alienImage.style.animationDuration = '1s'; 
+            this.alienImage.style.animationDelay = '0s'; 
+           //this.alienImage.style.backgroundColor='red';       
             setTimeout(() => {
                 // this.attackBtn.classList.remove('animate-move-right');
                 this.playerImage.classList.remove('animate-move-right');
@@ -121,42 +118,14 @@ class SpaceBattle {
               //  this.playerImage.style.backgroundColor='';
               //  this.alienImage.style.backgroundColor='';
              //   this.playerImage.src='images/PLAYER_SHIP.png';
-            }, 2000); // 5000ms = duration of the animation
+            }, 2000); // 
         }
 
-        // startAnimation() {
-        //     console.log('Starting animation');
-        
-        //     // Change the player image
-        //     //this.playerImage.src = 'images/e0bb5dfd0a11994244793d6eb28138ae.gif'; // New image
-        
-        //     // Add animation classes
-        //     this.playerImage.classList.add('animate-move-right');
-        //     this.alienImage.classList.add('animate-move-left');
-
-        //          // Change the animation properties
-        //     this.playerImage.style.animationName = 'moveRight';
-        //     this.playerImage.style.animationDuration = '1s'; // Adjust as needed
-        //     this.playerImage.style.animationDelay = '0s'; // Adjust as needed
-        //   //  this.playerImage.style.backgroundColor='blue';
-        //    this.playerImage.src= 'images/e0bb5dfd0a11994244793d6eb28138ae.gif';
-
-        //     this.alienImage.style.animationName = 'moveLeft';
-        //     this.alienImage.style.animationDuration = '1s'; // Adjust as needed
-        //     this.alienImage.style.animationDelay = '0s'; // Adjust as needed
-        //    //this.alienImage.style.backgroundColor='red';
-        
-        //     // Remove classes and revert image after animation ends
-        //     this.playerImage.addEventListener('animationend', () => {
-        //         this.playerImage.classList.remove('animate-move-right');
-        //         this.alienImage.classList.remove('animate-move-left');
-        //         this.playerImage.src = 'images/PLAYER_SHIP.png'; // Restore original image
-        //     }, { once: true }); // Ensures event listener is removed after it runs once
-        // }
-
-        
         updateHealthBars() {
-            if (this.player && this.player.hull) {
+            if(this.player.hull <=0){
+                document.getElementById('player-health-inner').style.width = '0%';
+            }
+             if (this.player && this.player.hull) {
                 const playerHealthPercentage = this.player.hull / 20 * 100;
                 document.getElementById('player-health-inner').style.width = `${playerHealthPercentage}%`;
             } else{
@@ -166,9 +135,7 @@ class SpaceBattle {
             if (alien && alien.hull) {
                 const alienHealthPercentage = alien.hull / alien.originalHull * 100;
                 document.getElementById('alien-health-inner').style.width = `${alienHealthPercentage}%`;
-            }
-            else {
-                // Handle the case where the alien might not be defined
+            } else {
                 document.getElementById('alien-health-inner').style.width = '0%';
             }   
         }
@@ -181,7 +148,6 @@ class SpaceBattle {
             const RoundNo = this.currentAlienIndex +1;
             // this.alienCountNumber.textContent = `Aliens Left: ${remainingAliens}`;
             this.alienCountNumber.textContent = `Aliens Left: ${remainingAliens} `;
-            
         }
         // createAliens() {
         //     return [
