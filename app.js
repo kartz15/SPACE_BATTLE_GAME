@@ -30,7 +30,7 @@ class SpaceBattle {
             this.resetBtn.addEventListener('click', () => this.resetGame());
             }
         initializeGame() {
-            this.player = new Ship("USS Assembly",20,5, 0.7,'https://giffiles.alphacoders.com/576/57614.gif');
+            this.player = new Ship("USS Assembly",20,5, 0.7,'images/PLAYER_SHIP.png');
             this.aliens = this.createAliens();
             this.currentAlienIndex = 0;
             this.totalAliens = this.aliens.length;
@@ -97,21 +97,71 @@ class SpaceBattle {
         }   
         startAnimation() {
                console.log('Starting animation');
+               
             // this.attackBtn.classList.add('animate-move-right');
             this.playerImage.classList.add('animate-move-right');
-            this.alienImage.classList.add('animate-move-right');
-            
+            this.alienImage.classList.add('animate-move-left');
+
+             // Change the animation properties
+            this.playerImage.style.animationName = 'moveRight';
+            this.playerImage.style.animationDuration = '1s'; // Adjust as needed
+            this.playerImage.style.animationDelay = '0s'; // Adjust as needed
+          //  this.playerImage.style.backgroundColor='blue';
+         //  this.playerImage.src= 'images/e0bb5dfd0a11994244793d6eb28138ae.gif';
+
+            this.alienImage.style.animationName = 'moveLeft';
+            this.alienImage.style.animationDuration = '1s'; // Adjust as needed
+            this.alienImage.style.animationDelay = '0s'; // Adjust as needed
+           //this.alienImage.style.backgroundColor='red';
+                    
             setTimeout(() => {
-                this.attackBtn.classList.remove('animate-move-right');
+                // this.attackBtn.classList.remove('animate-move-right');
                 this.playerImage.classList.remove('animate-move-right');
-                this.alienImage.classList.remove('animate-move-right');
-            }, 5000); // 5000ms = duration of the animation
+                this.alienImage.classList.remove('animate-move-left');
+              //  this.playerImage.style.backgroundColor='';
+              //  this.alienImage.style.backgroundColor='';
+             //   this.playerImage.src='images/PLAYER_SHIP.png';
+            }, 2000); // 5000ms = duration of the animation
         }
+
+        // startAnimation() {
+        //     console.log('Starting animation');
+        
+        //     // Change the player image
+        //     //this.playerImage.src = 'images/e0bb5dfd0a11994244793d6eb28138ae.gif'; // New image
+        
+        //     // Add animation classes
+        //     this.playerImage.classList.add('animate-move-right');
+        //     this.alienImage.classList.add('animate-move-left');
+
+        //          // Change the animation properties
+        //     this.playerImage.style.animationName = 'moveRight';
+        //     this.playerImage.style.animationDuration = '1s'; // Adjust as needed
+        //     this.playerImage.style.animationDelay = '0s'; // Adjust as needed
+        //   //  this.playerImage.style.backgroundColor='blue';
+        //    this.playerImage.src= 'images/e0bb5dfd0a11994244793d6eb28138ae.gif';
+
+        //     this.alienImage.style.animationName = 'moveLeft';
+        //     this.alienImage.style.animationDuration = '1s'; // Adjust as needed
+        //     this.alienImage.style.animationDelay = '0s'; // Adjust as needed
+        //    //this.alienImage.style.backgroundColor='red';
+        
+        //     // Remove classes and revert image after animation ends
+        //     this.playerImage.addEventListener('animationend', () => {
+        //         this.playerImage.classList.remove('animate-move-right');
+        //         this.alienImage.classList.remove('animate-move-left');
+        //         this.playerImage.src = 'images/PLAYER_SHIP.png'; // Restore original image
+        //     }, { once: true }); // Ensures event listener is removed after it runs once
+        // }
+
+        
         updateHealthBars() {
             if (this.player && this.player.hull) {
                 const playerHealthPercentage = this.player.hull / 20 * 100;
                 document.getElementById('player-health-inner').style.width = `${playerHealthPercentage}%`;
-            } 
+            } else{
+                document.getElementById('player-health-inner').style.width = '0%';
+            }
             const alien = this.aliens[this.currentAlienIndex];
             if (alien && alien.hull) {
                 const alienHealthPercentage = alien.hull / alien.originalHull * 100;
@@ -128,7 +178,10 @@ class SpaceBattle {
         updateAlienCount() {
             const totalAliens = this.aliens.length;
             const remainingAliens = totalAliens - this.currentAlienIndex;
-            this.alienCountNumber.textContent = `Aliens left: ${remainingAliens} / ${totalAliens}`;
+            const RoundNo = this.currentAlienIndex +1;
+            // this.alienCountNumber.textContent = `Aliens Left: ${remainingAliens}`;
+            this.alienCountNumber.textContent = `Aliens Left: ${remainingAliens} `;
+            
         }
         // createAliens() {
         //     return [
@@ -142,10 +195,10 @@ class SpaceBattle {
         // }
         createAliens() {
             return [
-                new Ship("E.T.", this.generateRandomNumber(3, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://media0.giphy.com/media/Z70x1bA6mL3OM/giphy.gif?cid=6c09b952csiy1go8kkbdjf9xrk93awm8hivucdb5hwx9di8k&ep=v1_gifs_search&rid=giphy.gif&ct=g'),
-                new Ship("Roger", this.generateRandomNumber(4, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.netanimations.net/alien_56.gif'),
-                new Ship("ExampleAlien", this.generateRandomNumber(5, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.animatedimages.org/data/media/33/animated-alien-and-extraterrestrial-image-0163.gif'),
-                new Ship("Four_eye_Freak", this.generateRandomNumber(6, 10), this.generateRandomNumber(3, 4), this.generateRandomNumber(0.6, 0.8), 'https://media.tenor.com/SrJ7qdCO1LAAAAAM/space-alien.gif'),
+                new Ship("MagmaAlien", this.generateRandomNumber(3, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://media0.giphy.com/media/Z70x1bA6mL3OM/giphy.gif?cid=6c09b952csiy1go8kkbdjf9xrk93awm8hivucdb5hwx9di8k&ep=v1_gifs_search&rid=giphy.gif&ct=g'),
+                new Ship("RogerAlien", this.generateRandomNumber(4, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.netanimations.net/alien_56.gif'),
+                new Ship("Rako-GordaAlien", this.generateRandomNumber(5, 10), this.generateRandomNumber(2, 4), this.generateRandomNumber(0.6, 0.8), 'https://www.animatedimages.org/data/media/33/animated-alien-and-extraterrestrial-image-0163.gif'),
+                new Ship("Four_eye_FreakAlien", this.generateRandomNumber(6, 10), this.generateRandomNumber(3, 4), this.generateRandomNumber(0.6, 0.8), 'https://media.tenor.com/SrJ7qdCO1LAAAAAM/space-alien.gif'),
                 new Ship("CamoAlien", this.generateRandomNumber(7, 10), this.generateRandomNumber(3, 4), this.generateRandomNumber(0.6, 0.8), 'https://cdn.dribbble.com/users/2023273/screenshots/6026642/234324.gif'),
                 new Ship("LlamaAlien", this.generateRandomNumber(8, 12), this.generateRandomNumber(4, 5), this.generateRandomNumber(0.7, 0.8), 'https://cdn.pixabay.com/animation/2023/01/03/12/08/12-08-43-309_512.gif')
             ];
@@ -193,16 +246,19 @@ class SpaceBattle {
                     this.updateDetails();
                     this.updateStatus(`Congratulations! ${alien.name} has been destroyed. You win this round! .Next alien: ${this.aliens[this.currentAlienIndex].name}. Prepare for battle!`);
                     this.updateHealthBars(); 
+                    //this.startAnimation();
                 } else {
                     this.updateStatus(`All aliens have been destroyed! You win the game!`);
                     this.attackBtn.disabled = true;
                     this.updateAlienCount(); 
                     this.updateHealthBars(); 
+                 //   this.startAnimation();
                     this.showModal('https://gifdb.com/images/high/gold-star-well-done-fireworks-fqthsikuto42dq7j.gif', 'Congratulations! You have defeated all the aliens and won the game!');
                     return;
                 }
                 this.updateAlienCount(); 
                 this.updateHealthBars(); 
+                this.startAnimation();
                 return;
             }
             // Alien retaliates
@@ -210,18 +266,28 @@ class SpaceBattle {
             if (alienHit) {
                 this.updateStatus(`The alien retaliates! ${alien.name} hit you. Alien hull is now ${alien.hull} .Your hull is now ${this.player.hull}`);
                 this.updateHealthBars(); 
+                this.updateDetails();
+             //   this.startAnimation();
+                this.updateImages();
             } else {
                 this.updateStatus(`The alien retaliates but misses! Alien hull is now ${alien.hull} .Your hull is now ${this.player.hull}`);
                 this.updateHealthBars(); 
+                this.updateDetails();
+                this.updateImages();
+               // this.startAnimation();
             }
             this.updateDetails();
             this.updateHealthBars(); 
+            this.updateImages();
+           this.startAnimation();
             if (this.player.hull <= 0) {
                 this.updateStatus(`Your ship has been destroyed by ${alien.name}! Game over.`);
                 this.attackBtn.disabled = true;
                 this.retreatBtn.disabled = true;
                 this.updateHealthBars(); 
+                this.updateImages();
                 this.showModal('https://gifdb.com/images/high/n64-game-over-q7h116ww5vxjzgv6.gif', 'Your ship has been destroyed. Game over.');
+                //this.startAnimation();
             }
         }
     }
@@ -253,11 +319,11 @@ class SpaceBattle {
         this.alienImage.src = this.aliens[this.currentAlienIndex].image;
     }
     updateDetails() {
-        this.playerName.textContent = `Your Ship: ${this.player.name}`;
+        this.playerName.textContent = `${this.player.name}`;
         this.playerDetails.textContent = `Hull: ${this.player.hull}, Firepower: ${this.player.firepower}, Accuracy: ${(this.player.accuracy * 100).toFixed(1)}%`;
 
         const alien = this.aliens[this.currentAlienIndex];
-        this.alienName.textContent = `Target Alien: ${alien.name}`;
+        this.alienName.textContent = `${alien.name}`;
         this.alienDetails.textContent = `Hull: ${alien.hull}, Firepower: ${alien.firepower}, Accuracy: ${(alien.accuracy * 100).toFixed(1)}%`;
     }
 }

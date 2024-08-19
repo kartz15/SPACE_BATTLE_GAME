@@ -3,14 +3,15 @@ body, h1, h2, p, button {
     padding: 0;
     /* box-sizing: border-box; */
 }
-
 body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("https://cdn.pixabay.com/animation/2024/02/18/16/36/16-36-43-783_512.gif");
+    /* background-image: url("https://cdn.pixabay.com/animation/2024/02/18/16/36/16-36-43-783_512.gif"); */
+    /* background-image:url("https://i.pinimg.com/originals/8e/46/15/8e46150f790fbefe438d9c2767c32ad1.gif"); */
+    background-image:url("https://media.tenor.com/8XfhFrwNfv0AAAAM/space-pixel-art.gif");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -18,11 +19,9 @@ body {
     color: #fff;
     z-index: 1;
 }
-
 #start-screen {
-    text-align: center;
+    text-align: center; 
 }
-
 #game {
     display: flex;
     flex-direction: column;
@@ -30,14 +29,12 @@ body {
     width: 80%;
     max-width: 1200px;
 }
-
 .battlefield {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
 }
-
 .game-section {
     display: flex;
     flex-direction: column;
@@ -47,7 +44,6 @@ body {
     border-radius: 10px; 
     /* background-color: rgba(0, 0, 0, 0.6); */
 }
-
 /* 
 #player-section {
     border-color: #0f0;
@@ -61,22 +57,16 @@ body {
     margin-bottom: 10px;
     font-size: 20px;
 }
-
 #player-image, #alien-image {
-    width: 200px;
-    height: 200px;
     margin-bottom: 10px;
     border-radius: 50%;
-
     width: 100px;
     height: 100px;
-    /* background-color: red; */
     position: relative;
-    animation-name: move;
+    animation-name: moveonstart; /*to move on start */
     animation-duration: 10s;
     animation-delay: -7s;
 }
-
 #controls {
     display:inline;
     justify-content: space-evenly;
@@ -84,16 +74,20 @@ body {
 }
 /* Define a class to apply the animation */
 .animate-move-right {
-    animation: moveRight 5s ease forwards; /* Apply animation with ease timing function */
+    animation: moveRight 1s ease forwards; /* Apply animation with ease timing function */
 }
  /* Define the keyframes for the animation */
  @keyframes moveRight {
-    from { 
-        transform: translateX(0); /* Start from original position */
-    }
-    to { 
-        transform: translateX(300px); /* Move 300px to the right */
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(100px); }
+}
+.animate-move-left {
+    animation: moveLeft 1s forwards; /* Apply animation with ease timing function */
+}
+ /* Define the keyframes for the animation */
+ @keyframes moveLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100px); }
 }
 /* General Button Styles */
 button {
@@ -108,7 +102,6 @@ button {
     display: inline-block; 
     width: 100px;
 }
-
 button:hover {
     background-color: #0056b3;
 }
@@ -116,94 +109,78 @@ button:hover {
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
-}
-
+}                                    
 /* Specific Styles for Attack Button */
 #attackBtn {
     background-color: #28a745;
     border: 2px solid #1e7e34; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
-
 #attackBtn:hover {
     background-color: #218838; 
     transform: scale(1.05); 
 }
-
 #attackBtn:active {
     background-color: #1e7e34; 
     transform: scale(0.95);
 }
-
 #attackBtn:focus {
     animation: pulse 0.6s; 
     outline: none;
     background-color: rgb(26, 146, 182);
 }
-
 /* Specific Styles for Retreat Button (Keeping as is for consistency) */
 #retreatBtn {
     background-color: #919d25; 
     border: 2px solid #a4b22b; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
-
 #retreatBtn:hover {
     background-color: #bfda53; 
     transform: scale(1.05);
 }
-
 #retreatBtn:active {
     background-color: #003d7a; 
     transform: scale(0.95);
 }
-
 /* Specific Styles for Reset Button */
 #resetBtn {
     background-color: #dc3545; 
     border: 2px solid #b52a38; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
-
 #resetBtn:hover {
     background-color: #c82333; 
     transform: scale(1.05);
 }
-
 #resetBtn:active {
     background-color: #bd2130; 
     transform: scale(0.95); 
 }
-
 /* Specific Styles for Start Game Button */
 #startBtn {
     background-color: #17a2b8;
     border: 2px solid #117a8b; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 #startBtn:hover {
     background-color: #138496;
     transform: scale(1.05);
 }
-
 #startBtn:active {
     background-color: #117a8b; 
     transform: scale(0.95);
 }
-
 #status {
     font-size: 22px;
     margin-top: 20px;
 }
-
 #alien-count {
     font-size: 24px;
     margin-top: 20px;
     font-weight: bold;
     color: #f00; 
 }
-
 /* Responsive adjustments */
 @media (max-width: 600px) {
     /* Stack battlefield items vertically */
@@ -213,26 +190,22 @@ button:disabled {
         margin-top: 1em;
         display: flex;
     }
-
     /* Style player and alien images */
     #player-image, #alien-image {
         width: 100px;
         height: 100px;
         margin-bottom: 10px; 
     }
-
     /* Hide all other content except player and alien images, and buttons */
     #start-screen {
         display: none; 
     }
-
     #game {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%; 
     }
-
     #controls {
         display: flex; 
         justify-content: center; 
@@ -240,28 +213,24 @@ button:disabled {
         margin: 10px 0; /* Adjust margin as needed */
         align-items: center;
     }
-
     /* Ensure buttons are displayed properly */
     button {
         margin: 5px;
         width: 90px; 
         font-size: 16px; 
     }
-
     /* Hide status and health bars */
-    .health-bar, #player-details, #alien-details {
+     #player-details, #alien-details {
         display: none; 
     }
-
     #status {
         font-size: small;
     }
 
-    /* Hide player and alien names */
+    /* Hide player and alien names
     #player-name, #alien-name {
         display: none; 
-    }
-
+    } */
     /* Style alien count */
     #alien-count {
         font-size: medium; /* Corrected font size */
@@ -270,8 +239,6 @@ button:disabled {
         font-weight: bold;
     }
 }
-
-
 .health-bar {
     width: 200px;
     height: 20px;
@@ -279,12 +246,10 @@ button:disabled {
     border-radius: 10px;
     margin: 10px;
 }
-
 .health-bar div {
     height: 100%;
     border-radius: 10px;
 }
-
 #player-health-inner {
     background-color: #28a745; /* Green for player */
 }
@@ -292,7 +257,6 @@ button:disabled {
 #alien-health-inner {
     background-color: #f00; /* Red for alien */
 }
-
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -304,14 +268,11 @@ button:disabled {
         transform: scale(1);
     }
 }
-
-
-
-@keyframes move {
-    0%   {background-color:red; left:0px; top:0px;}
-    25%  {background-color:yellow; left:200px; top:0px;}
-    50%  {background-color:blue; left:200px; top:200px;}
-    75%  {background-color:green; left:0px; top:200px;}
-    100% {background-color:red; left:0px; top:0px;}
+@keyframes moveonstart {
+    0%   {background-color:rgb(19, 14, 14); left:0px; top:0px;}
+    25%  {background-color:rgb(19, 19, 16); left:200px; top:0px;}
+    50%  {background-color:rgb(16, 16, 18); left:200px; top:200px;}
+    75%  {background-color:rgb(13, 17, 13); left:0px; top:200px;}
+    100% {background-color:rgb(4, 2, 2); left:0px; top:0px;}
   }
 
